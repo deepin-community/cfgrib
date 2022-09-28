@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+# export DH_VERBOSE=1
+
+export PYBUILD_NAME=cfgrib
+PY3VERS:= $(shell py3versions -s)
+
+# The magic debhelper  rule
+%:
+	dh $@  --buildsystem=pybuild
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf .eggs cfgrib.egg-info
+
+
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	for p in $(PY3VERS); do \
+	PY3VERNUM=`echo $$p | sed -e 's/python//' `; \
+		pybuild --test --test-pytest -i $$p -p $$PY3VERNUM  ;  \
+                done
+endif

@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: cfgrib
+Upstream-Contact: European Centre for Medium-Range Forecasts <software.support@ecmwf.int>
+Source: https://github.com/ecmwf/cfgrib
+
+Files: *
+Copyright: 2017-2018 European Centre for Medium-Range Weather Forecasts (ECMWF)
+License: Apache
+
+License: Apache
+ This package is licensed under the Apache License, 2.0.
+ A copy of this license may be found at: /usr/share/common-licenses/Apache-2.0

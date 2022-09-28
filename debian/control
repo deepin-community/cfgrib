@@ -1,0 +1,33 @@
+Source: cfgrib
+Section: python
+Priority: optional
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Build-Depends: debhelper-compat (= 13), 
+ dh-sequence-python3,
+ python3-all,
+ python3-pytest <!nocheck>,
+ python3-xarray <!nocheck>,
+ python3-click <!nocheck>,
+ python3-setuptools,
+ python3-numpy,
+ python3-attr,
+ python3-cffi,
+ python3-future,
+ python3-eccodes,
+ libeccodes0
+Standards-Version: 4.6.0
+Homepage: https://pypi.org/project/cfgrib
+Vcs-Browser: https://salsa.debian.org:/science-team/cfgrib
+Vcs-Git: https://salsa.debian.org:/science-team/cfgrib.git -b debian/latest
+
+Package: python3-cfgrib
+Architecture: any
+Depends: ${misc:Depends}, libeccodes-data, 
+ ${python3:Depends}, libeccodes0, python3-xarray, python3-cffi,
+ python3-eccodes, python3-pandas
+Description:  Python 3 module supporting the CF convention in GRIB files
+ This module provides a Python3 interface to map GRIB files to the NetCDF
+ Common Data Model following the CF Conventions. 
+ The high level API is designed to support a GRIB backend for xarray and it is
+ inspired by NetCDF-python and h5netcdf. 
+ Low level access and decoding is performed via the ECMWF ecCodes library.

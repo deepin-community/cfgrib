@@ -1,0 +1,118 @@
+cfgrib (0.9.9.1-1) unstable; urgency=medium
+
+  * New upstream release. Closes: #993631
+  * Udpdate backend_kwargs_errors_fail.patch for another case
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 03 Oct 2021 16:18:10 +0100
+
+cfgrib (0.9.9.0-1) unstable; urgency=medium
+
+  * New upstream release
+    - setup.py patch obsolete
+    - pandas-xfail.patch updated for another instance
+    - backend_kwargs_errors_fail.patch needed for test failures 
+  * Add d/watch file
+  * Build-depend on python3-eccodes
+  * Standards-Version: 4.6.0; no changes required
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Thu, 02 Sep 2021 15:19:41 +0100
+
+cfgrib (0.9.8.5-1) unstable; urgency=medium
+
+  * New upstream release
+  * Standards-Version: 4.5.1; no changes required
+  * Move to debhelper compat 13
+  * Point Vcs-Git in d/control to debian/latest branch
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 04 Jan 2021 18:29:03 +0000
+
+cfgrib (0.9.8.4-2) unstable; urgency=medium
+
+  * Add additional autopkg tests. Closes: #971455
+  * Disable via XFAIL tests that fail due to Pandas (see #973819).
+    Closes: #973115.
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 10 Nov 2020 14:46:49 +0000
+
+cfgrib (0.9.8.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * debhelper level 13
+  * Add d/gpb.conf with DEP-14 branch names
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 15 Sep 2020 18:10:16 +0100
+
+cfgrib (0.9.8.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Close bugs fixed in previous release: Closes: #953748, #955010
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 30 Mar 2020 10:00:10 +0100
+
+cfgrib (0.9.7.7-2) unstable; urgency=medium
+
+  * Add python3-cfgrib to test depends. Add simple load test
+  * Add depends on python3-cffi
+    Closes: #952748
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 16 Mar 2020 10:15:28 +0000
+
+cfgrib (0.9.7.7-1) unstable; urgency=medium
+
+  * New upstream release
+  * Standards-Version: 4.5.0
+  * Use dh-sequence-python3 not --with python3
+  * Make test dependencies conditional and enable tests
+  * Add test dependency python3-click
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 23 Feb 2020 11:39:24 +0000
+
+cfgrib (0.9.7.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Standards-Version: 4.4.1.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 04 Nov 2019 18:27:47 +0000
+
+cfgrib (0.9.7.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Thu, 10 Oct 2019 10:29:18 +0100
+
+cfgrib (0.9.7.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Use debhelper-compat (= 12)
+  * Standards-Version: 4.4.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 03 Aug 2019 08:30:44 +0100
+
+cfgrib (0.9.7-1) unstable; urgency=medium
+
+  * New upstream release
+  * Move to debhelper 12
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 15 Jun 2019 10:20:28 +0100
+
+cfgrib (0.9.5.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop unused dependency on ${shlibs:Depends}
+  * Standards-Version: 4.3.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 11 Jan 2019 10:05:14 +0000
+
+cfgrib (0.9.4.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Standards-Version: 4.2.1
+  * Drop hard-coded xz compression of debian tarball
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 09 Nov 2018 10:25:42 +0000
+
+cfgrib (0.8.4.4-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #907405)
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 28 Aug 2018 11:56:45 +0100
