@@ -2,6 +2,64 @@
 Changelog for cfgrib
 ====================
 
+0.9.10.4 (2023-05-19)
+---------------------
+
+- added --var-encoding-json (or -v) option to the to_netcdf tool, e.g.
+  ``cfgrib to_netcdf -v '{"dtype": "float", "scale_factor": 0.1}' -o $OUTFILE $INFILE``
+  See `#334 <https://github.com/ecmwf/cfgrib/pull/334>`_.
+- fix issue where xarrays derived from Gaussian grids did not have the correct
+  geometry when written back out as GRIB
+  See `#330 <https://github.com/ecmwf/cfgrib/issues/330>`_.
+- fix issue where open_datasets() could merge different GRIB fields
+  that have the same data values
+  See `#336 <https://github.com/ecmwf/cfgrib/issues/336>`_.
+
+0.9.10.3 (2022-11-24)
+---------------------
+
+- large reduction in memory leak
+  See `#320 <https://github.com/ecmwf/cfgrib/pull/320/>`_.
+
+- Replaced ``distutils.version`` by ``packaging.version`` and
+  added description and url to the xarray plugin.
+  See `#318 <https://github.com/ecmwf/cfgrib/pull/318/>`_.
+
+
+0.9.10.2 (2022-10-04)
+---------------------
+
+- added --netcdf_kwargs_json option to 'cfgrib to_netcdf'
+  See `#294 <https://github.com/ecmwf/cfgrib/pull/294/>`_.
+- fixed support for GRIB files with alternativeRowScanning=1
+  See  `#296 <https://github.com/ecmwf/cfgrib/pull/296/>`_.
+- fixed support for missing values
+  See `#313 <https://github.com/ecmwf/cfgrib/issues/313>`_.
+
+
+0.9.10.1 (2022-03-16)
+---------------------
+
+- Fix failure to read index files.
+  See `#292 <https://github.com/ecmwf/cfgrib/issues/292>`_.
+- Allow backend kwargs to be provided in the to_netcdf executable,
+  either via a json format string, or a path to a json file via -b.
+  See `#288 <https://github.com/ecmwf/cfgrib/pull/288/>`_.
+- Fixed issue where the use of relpath() could cause a problem on Windows.
+  See `#284 <https://github.com/ecmwf/cfgrib/issues/284>`_.
+- Fix passing of pathlib.Path.
+  See `#282 <https://github.com/ecmwf/cfgrib/issues/282>`_.
+- Fixed issue where writing an ensemble number into a GRIB file caused an error.
+  See `#278 <https://github.com/ecmwf/cfgrib/issues/278>`_.
+
+
+0.9.10.0 (2022-01-31)
+---------------------
+
+- Big internal refactor to add support for a generic ``Fieldset`` similar to Metview.
+  See `#243 <https://github.com/ecmwf/cfgrib/issues/243>`_.
+
+
 0.9.9.1 (2021-09-29)
 --------------------
 

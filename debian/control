@@ -15,7 +15,8 @@ Build-Depends: debhelper-compat (= 13),
  python3-future,
  python3-eccodes,
  libeccodes0
-Standards-Version: 4.6.0
+Build-Confliicts: python3-cfgrib
+Standards-Version: 4.6.2
 Homepage: https://pypi.org/project/cfgrib
 Vcs-Browser: https://salsa.debian.org:/science-team/cfgrib
 Vcs-Git: https://salsa.debian.org:/science-team/cfgrib.git -b debian/latest

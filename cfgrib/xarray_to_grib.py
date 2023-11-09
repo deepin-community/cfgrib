@@ -211,6 +211,7 @@ def canonical_dataarray_to_grib(
     # validate Dataset keys, DataArray names, and attr keys/values
     detected_keys, suggested_keys = detect_grib_keys(data_var, default_grib_keys, grib_keys)
     merged_grib_keys = merge_grib_keys(grib_keys, detected_keys, suggested_keys)
+    merged_grib_keys["missingValue"] = messages.MISSING_VAUE_INDICATOR
 
     if "gridType" not in merged_grib_keys:
         raise ValueError("required grib_key 'gridType' not passed nor auto-detected")
@@ -219,7 +220,8 @@ def canonical_dataarray_to_grib(
 
     coords_names, data_var = expand_dims(data_var)
 
-    header_coords_values = [data_var.coords[name].values.tolist() for name in coords_names]
+    header_coords_values = [list(data_var.coords[name].values) for name in coords_names]
+
     for items in itertools.product(*header_coords_values):
         select = {n: v for n, v in zip(coords_names, items)}
         field_values = data_var.sel(**select).values.flat[:]
@@ -231,7 +233,7 @@ def canonical_dataarray_to_grib(
         if invalid_field_values.all():
             continue
 
-        missing_value = merged_grib_keys.get("missingValue", 9999)
+        missing_value = merged_grib_keys.get("GRIB_missingValue", messages.MISSING_VAUE_INDICATOR)
         field_values[invalid_field_values] = missing_value
 
         message = cfmessage.CfMessage.from_message(template_message)
@@ -239,6 +241,10 @@ def canonical_dataarray_to_grib(
             if coord_name in ALL_TYPE_OF_LEVELS:
                 coord_name = "level"
             message[coord_name] = coord_value
+
+        if invalid_field_values.any():
+            message["bitmapPresent"] = 1
+        message["missingValue"] = missing_value
 
         # OPTIMIZE: convert to list because Message.message_set doesn't support np.ndarray
         message["values"] = field_values.tolist()

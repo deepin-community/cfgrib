@@ -1,0 +1,10 @@
+--- a/tests/test_40_xarray_store.py
++++ b/tests/test_40_xarray_store.py
+@@ -86,6 +86,7 @@
+     assert var.mean() > 0.0
+ 
+ 
++@pytest.mark.xfail(reason="extra_coords not supported on backend in Debian")
+ def test_open_dataset_extra_coords_attrs() -> None:
+     backend_kwargs = {
+         "time_dims": ("forecastMonth", "indexing_time"),
