@@ -5,6 +5,8 @@
 export PYBUILD_NAME=cfgrib
 PY3VERS:= $(shell py3versions -s)
 
+export PYTHONPATH=$(shell pwd)
+
 # The magic debhelper  rule
 %:
 	dh $@  --buildsystem=pybuild

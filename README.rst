@@ -5,13 +5,13 @@ cfgrib: A Python interface to map GRIB files to the NetCDF Common Data Model fol
    :target: https://pypi.python.org/pypi/cfgrib/
 
 Python interface to map GRIB files to the
-`Unidata's Common Data Model v4 <https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/CDM/>`_
+`Unidata's Common Data Model v4 <https://docs.unidata.ucar.edu/netcdf-java/current/userguide/common_data_model_overview.html>`_
 following the `CF Conventions <http://cfconventions.org/>`_.
 The high level API is designed to support a GRIB engine for `xarray <http://xarray.pydata.org/>`_
 and it is inspired by `netCDF4-python <http://unidata.github.io/netcdf4-python/>`_
 and `h5netcdf <https://github.com/shoyer/h5netcdf>`_.
 Low level access and decoding is performed via the
-`ECMWF ecCodes library <https://software.ecmwf.int/wiki/display/ECC/>`_ and
+`ECMWF ecCodes library <https://confluence.ecmwf.int/display/ECC/>`_ and
 the `eccodes python package <https://pypi.org/project/eccodes>`_.
 
 Features with development status **Beta**:
@@ -25,7 +25,8 @@ Features with development status **Beta**:
 - reads the data lazily and efficiently in terms of both memory usage and disk access,
 - allows larger-than-memory and distributed processing via *xarray* and *dask*,
 - supports translating coordinates to different data models and naming conventions,
-- supports writing the index of a GRIB file to disk, to save a full-file scan on open.
+- supports writing the index of a GRIB file to disk, to save a full-file scan on open,
+- accepts objects implementing a generic *Fieldset* interface as described in `ADVANCED_USAGE.rst`.
 
 Work in progress:
 
@@ -297,7 +298,7 @@ Attributes:
 Automatic filtering
 -------------------
 
-*cfgrib* also provides a function that automate the selection of appropriate ``filter_by_keys``
+*cfgrib* also provides a function that automates the selection of appropriate ``filter_by_keys``
 and returns a list of all valid ``xarray.Dataset``'s in the GRIB file.
 
 .. code-block: python
@@ -660,12 +661,12 @@ can be saved at the moment:
 .. code-block: python
 
 >>> from cfgrib.xarray_to_grib import to_grib
->>> ds = xr.open_dataset('era5-levels-members.grib', engine='cfgrib')
+>>> ds = xr.open_dataset('era5-levels-members.grib', engine='cfgrib').sel(number=0)
 >>> ds
 <xarray.Dataset>
-Dimensions:        (number: 10, time: 4, isobaricInhPa: 2, latitude: 61, longitude: 120)
+Dimensions:        (time: 4, isobaricInhPa: 2, latitude: 61, longitude: 120)
 Coordinates:
-  * number         (number) int64 0 1 2 3 4 5 6 7 8 9
+    number         int64 0
   * time           (time) datetime64[ns] 2017-01-01 ... 2017-01-02T12:00:00
     step           timedelta64[ns] ...
   * isobaricInhPa  (isobaricInhPa) float64 850.0 500.0
@@ -673,8 +674,8 @@ Coordinates:
   * longitude      (longitude) float64 0.0 3.0 6.0 9.0 ... 351.0 354.0 357.0
     valid_time     (time) datetime64[ns] ...
 Data variables:
-    z              (number, time, isobaricInhPa, latitude, longitude) float32 ...
-    t              (number, time, isobaricInhPa, latitude, longitude) float32 ...
+    z              (time, isobaricInhPa, latitude, longitude) float32 ...
+    t              (time, isobaricInhPa, latitude, longitude) float32 ...
 Attributes:
     GRIB_edition:            1
     GRIB_centre:             ecmf
@@ -686,9 +687,9 @@ Attributes:
 >>> to_grib(ds, 'out1.grib', grib_keys={'edition': 2})
 >>> xr.open_dataset('out1.grib', engine='cfgrib')
 <xarray.Dataset>
-Dimensions:        (number: 10, time: 4, isobaricInhPa: 2, latitude: 61, longitude: 120)
+Dimensions:        (time: 4, isobaricInhPa: 2, latitude: 61, longitude: 120)
 Coordinates:
-  * number         (number) int64 0 1 2 3 4 5 6 7 8 9
+    number         ...
   * time           (time) datetime64[ns] 2017-01-01 ... 2017-01-02T12:00:00
     step           timedelta64[ns] ...
   * isobaricInhPa  (isobaricInhPa) float64 850.0 500.0
@@ -696,8 +697,8 @@ Coordinates:
   * longitude      (longitude) float64 0.0 3.0 6.0 9.0 ... 351.0 354.0 357.0
     valid_time     (time) datetime64[ns] ...
 Data variables:
-    z              (number, time, isobaricInhPa, latitude, longitude) float32 ...
-    t              (number, time, isobaricInhPa, latitude, longitude) float32 ...
+    z              (time, isobaricInhPa, latitude, longitude) float32 ...
+    t              (time, isobaricInhPa, latitude, longitude) float32 ...
 Attributes:
     GRIB_edition:            2
     GRIB_centre:             ecmf
@@ -812,15 +813,15 @@ https://github.com/ecmwf/cfgrib
 
 Please see the CONTRIBUTING.rst document for the best way to help.
 
-Lead developer:
+Lead developers:
 
-- `Alessandro Amici <https://github.com/alexamici>`_ - `B-Open <https://bopen.eu>`_
+- `Iain Russell <https://github.com/iainrussell>`_ - `ECMWF <https://ecmwf.int>`_
+- `Baudouin Raoult <https://github.com/b8raoult>`_ - ECMWF
 
 Main contributors:
 
+- `Alessandro Amici <https://github.com/alexamici>`_ - `B-Open <https://bopen.eu>`_
 - `Aureliana Barghini <https://github.com/aurghs>`_ - B-Open
-- `Baudouin Raoult <https://github.com/b8raoult>`_ - `ECMWF <https://ecmwf.int>`_
-- `Iain Russell <https://github.com/iainrussell>`_ - ECMWF
 - `Leonardo Barcaroli <https://github.com/leophys>`_ - B-Open
 
 See also the list of `contributors <https://github.com/ecmwf/cfgrib/contributors>`_ who participated in this project.
