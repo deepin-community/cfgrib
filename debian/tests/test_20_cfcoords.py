@@ -60,7 +60,7 @@ def da3():
         coords=[
             ('lat', latitude, {'units': 'degrees_north'}),
             ('lon', longitude, {'units': 'degrees_east'}),
-            ('step', np.array(step, dtype=np.timedelta64), {'standard_name': 'forecast_period'}),
+            ('step', np.array(step, dtype=np.timedelta64), {'standard_name': 'forecast_period', 'units' : 's'}),
             (
                 'ref_time',
                 np.array(time, dtype=np.datetime64),

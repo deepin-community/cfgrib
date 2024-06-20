@@ -1,24 +1,24 @@
 Source: cfgrib
 Section: python
 Priority: optional
-Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Uploaders: Alastair McKinstry <mckinstry@debian.org>
 Build-Depends: debhelper-compat (= 13), 
  dh-sequence-python3,
  python3-all,
  python3-pytest <!nocheck>,
- python3-xarray <!nocheck>,
  python3-click <!nocheck>,
  python3-setuptools,
  python3-numpy,
  python3-attr,
  python3-cffi,
- python3-future,
  python3-eccodes,
  libeccodes0
-Standards-Version: 4.6.0
+Build-Conflicts: python3-cfgrib
+Standards-Version: 4.7.0
 Homepage: https://pypi.org/project/cfgrib
-Vcs-Browser: https://salsa.debian.org:/science-team/cfgrib
-Vcs-Git: https://salsa.debian.org:/science-team/cfgrib.git -b debian/latest
+Vcs-Browser: https://salsa.debian.org/science-team/cfgrib
+Vcs-Git: https://salsa.debian.org/science-team/cfgrib.git -b debian/latest
 
 Package: python3-cfgrib
 Architecture: any
